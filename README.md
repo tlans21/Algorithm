@@ -1,1 +1,1 @@
-<img src="https://img.shields.io/badge/GitHub-000000?style=flat-square&logo=GitHub&logoColor=white"/> <a href="https://tlans21.tistory.com/"><img src="https://img.shields.io/badge/Tistory-FF0000?style=flat-square&logo=Blogger&logoColor=white"/></a> 
+
