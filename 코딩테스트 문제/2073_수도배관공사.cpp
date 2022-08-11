@@ -9,7 +9,6 @@ int main(){
     int D;
     int C;
     int L;
-    int max1 = 0;
     int dp[100001] ={0,};
     dp[0] = 1;
     cin>>D>>P;
