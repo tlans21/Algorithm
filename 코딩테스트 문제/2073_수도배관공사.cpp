@@ -9,6 +9,7 @@ int main(){
     int D;
     int C;
     int L;
+    int ans = 0;
     int dp[100001] ={0,};
     dp[0] = 1;
     cin>>D>>P;
