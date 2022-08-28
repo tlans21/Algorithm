@@ -21,7 +21,7 @@ int main() {
 	int k;
 	cin >> k;
 	
-	for (int i = 0; i < k; i++) {
+	for (int i = 0; i <k; i++) {
 		int a, b, c, d;
 		cin >> a >> b >> c >> d;
 		cout << pSum[c][d] - pSum[a - 1][d] - pSum[c][b - 1] + pSum[a - 1][b - 1]<<'\n';
