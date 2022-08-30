@@ -21,8 +21,8 @@ int main(){
         pq.push(-temp);
     }
     pq.pop(); // pq안에 6개가 들어있는 상태로 for문을 끝내므로 빼줘야한다.
-
-    cout<<-pq.top();
+    int answer = -pq.top();
+    cout<<answer;
 
     return 0;
 }
