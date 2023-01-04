@@ -1,8 +1,7 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <map>
-#include <algorithm>
+
 using namespace std;
 
 vector<int> solution(vector<string> genres, vector<int> plays) {
@@ -17,7 +16,6 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
     
     
     while(music.size() > 0){
-        bool flag = true;
         int max = 0;
         string maxGenre = "";
         for(auto tmp : music){
@@ -32,9 +30,10 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
             int uniqueNum = -1;
             int play = 0;
             for(auto tmp2 : musicRecord[maxGenre]){
-                if(play < tmp2.second)
-                uniqueNum = tmp2.first;
-                play = tmp2.second;
+                if(play < tmp2.second){
+                    uniqueNum = tmp2.first;
+                    play = tmp2.second;
+                }
             }
             if(uniqueNum == -1){
                 break;
