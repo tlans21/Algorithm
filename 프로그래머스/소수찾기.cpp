@@ -1,60 +1,41 @@
 #include <string>
 #include <vector>
-
+#include <algorithm>
+#include <cmath>
+#include <unordered_set>
 using namespace std;
+
+int check(int num){
+    if(num == 0 || num == 1){
+        return 0;
+    }
+    for(int i = 2; i <= sqrt(num); i++){
+        if(num % i == 0){
+            return 0;
+        }
+    }
+    return 1;
+}
 
 int solution(string numbers) {
     int answer = 0;
-    bool flag = true;
-    vector<int> num;
-    
-    for(int i = 0; i < numbers.size(); i++){
-        int number = (numbers[i]) - '0';
-        num.push_back(number);    
-    }
-    int cnt = 0;
-    for(int i = 0; i < num.size(); i++){
-        //첫번째 자리 검사
-        int temp = num[i];
-        for(int j = 2; j < temp; j++){
-            if(temp % j == 0){
-                flag = false;
-            } 
-        }
-        if(flag == true){
-            cnt++;
-        }
-        flag = true;
-        for(int s = 0; s <num.size(); s++){
-            if(s == i){
-                continue;
-            }
-            temp += num[s];
-            for(int k = 2; k < temp; k++){
-                if(temp % k == 0){
-                    flag = false;
-                } 
-            }
-            if(flag == true){
-                cnt++;
-            }
-            temp -= num[s];
-            flag = true;
-            for(int c = 0; c <num.size(); c++){
-                if(c == i || c == s){
-                    continue;
-                }
-                temp +=num[c];
-                for(int q = 2; q < temp; q++){
-                    if(temp % q == 0){
-                        flag = false;
-                    }
-                }
-                temp -= num[c];
-                flag = true;
-            }
-        }
-    }
+    //소수가 만들어지는 경우의 수를 vector에 담는다 //순열 조합 오름차순
+    // vector에 담긴 소수를 에라토스테네스의 체를 이용하여 카운트
+    unordered_set<int> s;
+    int temp = 0;
+    sort(numbers.begin(), numbers.end());
 
+    do
+    {
+        for(int i = 1; i <= numbers.size(); i++){
+            temp = stoi(numbers.substr(0, i)); // substr을 통해 자른다.
+            if(check(temp)){
+                s.insert(temp);
+            }
+        }
+    } while (next_permutation(numbers.begin(), numbers.end()));
+
+
+    answer = s.size();
     return answer;
 }
