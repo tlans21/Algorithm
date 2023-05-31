@@ -5,5 +5,8 @@ for i in range(N):
     array.append(int(input()))
 
 result = sorted(array, reverse=True)
+#result
 
-print(result)
+for i in result:
+    print(i, end= " ")
+
