@@ -1,6 +1,7 @@
 visit = [0 for i in range(1, 10002)]
 
 sum = 0
+
 for i in range(1, 10001):
     cur = i
     while cur <= 10000:
