@@ -44,18 +44,30 @@ for i in range(0, len(student)):
 
             lst.append(cnt, blank, j, k)
     lst.sort(key = lambda x: (-x[0], -x[1], x[2], x[3]))
+    # cnt가 높은 순으로 정렬, 즉 주위에 좋아하는 사람이 많은 곳에 첫번째로 배치되어 정렬된다는 뜻. lst[0][2] lst[0][3]은 좌표
     board[lst[0][2]][lst[0][3]] = student[i][0]
 
-    student.sort()
+#학생 번호순으로 정렬
+student.sort()
 
-for s in range(0, len(student)):
-    for i in range(1, N+1):
-        for j in range(1, N+1):
-            for k in range(4):
-                nx = dx[k] + i
-                ny = dx[k] + j
-                if 1 <= nx <= N and 1<= ny <= N:
-                    if board[i][j] == 
+# 자리 배치가 완료 되고 점수 부여
+sum = 0
+for i in range(0, len(student)):
+    for j in range(1, N+1):
+        for k in range(1, N+1):
+            # 학생번호가 보드판에서 못 찾은 경우 다음 턴으로 넘어감.
+            if student[i][0] != board[j][k]:
+                continue
+
+            # 학생번호가 보드판에서 찾은 경우
+            for s in range(0, 4):
+                nx = dx[s] + i
+                ny = dy[s] + j
+
+                if 1 <= nx <= N and 1 <= ny <= N:
+                    # board[j][k] => 현재 학생의 번호를 이용하여 좋아하는 사람의 갯수를 구해야함
+                    
+
 
             
 
