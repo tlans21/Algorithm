@@ -1,41 +1,34 @@
 
-
 N = 100
-def dfs(x, y, board, depth):
+def dfs(x, y, depth, board, visited):
     
-    if 0 < x + 1 < N:
-        # 내려가기 이전에 왼쪽 오른쪽이 있는지 확인한다.
-        if 0 < y + 1 < N:
-            if board[x][y+1] == 1:
-                dfs(x, y+1, board, depth + 1)
-            elif board[x][y+1] == 0 and board[x][y-1] == 0:
-                if board[x + 1][y] == 1:
-                    dfs(x + 1, y, board, depth + 1)
-                elif board[x + 1][y] == 2:
-                    return True  
-        if 0 < y - 1 < N:
-            if board[x][y-1] == 1:
-                dfs(x, y-1, board, depth + 1)
-            elif board[x][y+1] == 0 and board[x][y-1] == 0:
-                if board[x + 1][y] == 1:
-                    dfs(x + 1, y, board, depth + 1)
-                elif board[x + 1][y] == 2:
-                    return True
+    visited[x][y] = True
+    # 좌우 확인
+    if 0 <= y + 1 < N and board[x][y+1] and not visited[x][y+1]:
+        return dfs(x, y + 1, depth + 1, board, visited)
+    elif 0 <= y - 1 < N and board[x][y-1] and not visited[x][y-1]:
+        return dfs(x, y - 1, depth + 1, board, visited)
+    elif 0 <= x + 1 < N and board[x+1][y] and not visited[x+1][y]:
+        if board[x+1][y] == 1:
+            return dfs(x + 1, y, depth + 1, board, visited)
+        elif board[x+1][y] == 2:
+            return True
     return False
 
 
+T = 10
+
+for k in range(1, T+1):
+    visit = [[False for _ in range(N)] for _ in range(N)]
+    a = int(input())
+    board = [list(map(int, input().split())) for _ in range(N)]
+    answer = 0
+    for i in range(N):
+        visit = [[False for _ in range(N)] for _ in range(N)]
+        if board[0][i] == 1:
+            if dfs(0, i, 0, board, visit) == True:
+                answer = i
+                break
+    print("#{} {}".format(a, answer))
 
 
-    
-    return False
-
-
-T = int(input())
-
-for i in range(1, T + 1):
-    board = [list(map(int, input().split())) for _ in range(100)]
-    for j in range(0, 100):
-        if board[0][j] == 1:
-            result = dfs(0, j, board, 0)
-            if result == True:
-                print(j)
