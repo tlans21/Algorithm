@@ -1,3 +1,4 @@
+from heapq
 T = int(input())
 
 def dfs(x, y, depth, dir):

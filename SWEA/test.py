@@ -1,4 +1,8 @@
-from itertools import combinations
+T = int(input())
 
-combi = list(combinations([1, 2, 3, 4, 5], 2))
-print(combi)
+for tc in range(1, T+1):
+    lst = list(map(int, input().split()))
+
+    answer = max(lst)
+
+    print("#{} {}".format(tc, answer))
