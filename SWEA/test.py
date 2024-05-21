@@ -1,8 +1,8 @@
-T = int(input())
+from itertools import combinations
+N = 100
+lst = [0 for _ in range(N)]
 
-for tc in range(1, T+1):
-    lst = list(map(int, input().split()))
 
-    answer = max(lst)
-
-    print("#{} {}".format(tc, answer))
+for i in range(1, N):
+    combi = combinations(lst, i)
+    print(list(combi))
