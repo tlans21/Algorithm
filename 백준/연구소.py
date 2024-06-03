@@ -11,7 +11,6 @@ def bfs(board):
         for j in range(M):
             if temp_board[i][j] == 2:
                 queue.append((i, j))
-
     cnt = 0
     while queue:
         nowX, nowY = queue.pop(0)
