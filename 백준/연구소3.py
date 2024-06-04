@@ -1,63 +1,63 @@
+from itertools import combinations
 dx = [-1, 1, 0, 0]
 dy = [0, 0, 1, -1]
 
-def bfs(board, combi_lst):
+def bfs(board, combi_lst, empty_cnt):
+    global answer
     temp_board = [[board[i][j] for j in range(N)] for i in range(N)]
-    time_board = [[123456789 for _ in range(N)] for _ in range(N)]
+    visited = [[-1 for _ in range(N)] for _ in range(N)]
+    
     queue = []
+    
     for i in range(M):
         (x, y) = combi_lst[i]
-        queue.append((x, y, 0))
-    
+        queue.append((x, y))
+        visited[x][y] = 1
+    cnt_val = 0
     while queue:
-        nowX, nowY, nowTime = queue.pop(0)
-        for i in range(4):
-            nextX = nowX + dx[i]
-            nextY = nowY + dy[i]
-            nextTime = nowTime + 1
-            if 0 <= nextX < N and 0 <= nextY < N:
-                # 벽이 아닌 경우 진행
-                if temp_board[nextX][nextY] == 0:
-                    if time_board[nextX][nextY] > nextTime:     
-                        time_board[nextX][nextY] = nextTime
-                        queue.append((nextX, nextY, nextTime))
+        if not empty_cnt:
+            break
+        
 
-                elif temp_board[nextX][nextY] == 2:
-                    if time_board[nextX][nextY] > nowTime:
-                        time_board[nextX][nextY] = nowTime
-                        queue.append((nextX, nextY, nowTime))
-    result = -1
-    for i in range(N):
-        for j in range(N):
-            if temp_board[i][j] != 1:
-                if time_board[i][j] == 123456789:
-                    return -1
-                result = max(result, time_board[i][j])
-    return result
+        cnt_val += 1
+        for _ in range(len(queue)):
+            nowX, nowY = queue.pop(0)
+            for i in range(4):
+                nextX = nowX + dx[i]
+                nextY = nowY + dy[i]
+                if 0 <= nextX < N and 0 <= nextY < N:
+                    if visited[nextX][nextY] == -1 and temp_board[nextX][nextY] == 0:
+                        visited[nextX][nextY] = 1
+                        empty_cnt -= 1
+                        queue.append((nextX, nextY))
+                    elif visited[nextX][nextY] == -1 and temp_board[nextX][nextY] == 2:
+                        visited[nextX][nextY] = 1
+                        queue.append((nextX, nextY))
 
-def combination(start, depth, board):
-    global answer
-    if depth == M:
-        maxLength = bfs(board, combi_lst)
-        if maxLength != -1:
-            answer = min(answer, maxLength)
-            return
-        answer = maxLength
-    for i in range(start, len(loc_lst)):
-        combi_lst.append(loc_lst[i])
-        combination(i + 1, depth + 1, board)
-        combi_lst.pop()
+    if not empty_cnt:
+        return cnt_val
+    else:
+        return 1e9
+    
 
-answer = 123456789
+answer = 1e9
 N, M = map(int, input().split())
 board = [list(map(int, input().split())) for _ in range(N)]
 loc_lst = []
 
+empty_cnt = 0
 combi_lst = []
 for i in range(N):
     for j in range(N):
         if board[i][j] == 2:
-            loc_lst.append((i, j))
+            loc_lst.append([i, j])
+        if board[i][j] == 0:
+            empty_cnt += 1
 
-combination(0, 0, board)
-print(answer)
+for virus in combinations(loc_lst, M):
+    answer = min(answer, bfs(board, virus, empty_cnt))
+
+if answer == 1e9:
+    print(-1)
+else:
+    print(answer)
