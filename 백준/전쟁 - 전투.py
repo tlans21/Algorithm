@@ -2,6 +2,10 @@
 # 같은 팀의 병사가 모일수록 강해진다.
 # N명이 뭉쳐있을땐 N^2의 힘을 낸다.
 # 대각선은 인접하다고 보지않는다.
+import sys
+sys.setrecursionlimit(10**6)
+input = sys.stdin.readline 
+
 
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
