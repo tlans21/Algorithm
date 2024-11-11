@@ -1,3 +1,6 @@
+import sys
+sys.setrecursionlimit(10 ** 6)
+
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
@@ -27,12 +30,13 @@ for _ in range(K):
 
 answer = 0
 answer_store = []
-for i in range(M):
-    cnt = 0 
+for i in range(M): 
     for j in range(N):
+        cnt = 1 # 제일 초기 재귀의 경우 cnt를 세어주지 않기 때문에 함수 외부에서 미리 카운트시킴.
         if board[i][j] == 0 and visited[i][j] == 0: # 색칠 안된 공간 dfs 시행과 깊이 진행이 안되어있는 곳으로
             dfs(i, j)
             answer_store.append(cnt)
             answer += 1
-print(answer_store)
+answer_store.sort() # 오름 차순 정렬
 print(answer)
+print(*answer_store)
